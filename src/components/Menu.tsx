@@ -56,7 +56,7 @@ const Menu = () => {
         Каталог
       </MenuItem>
       <MenuItem to="/reviews">Отзывы</MenuItem>
-      <MenuItem to="/">Доставка</MenuItem>
+      <MenuItem to="/delivery">Доставка</MenuItem>
       <MenuItem to="/">Контакты</MenuItem>
       <Telephone>8 (911) 934-12-98</Telephone>
       <Icon>

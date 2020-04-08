@@ -6,6 +6,8 @@ import Counter from "./components/Counter";
 import Footer from "./components/Footer";
 import Catalog from "./components/Catalog";
 import Reviews from './components/Reviews';
+import Delivery from './components/Delivery';
+
 function App() {
   return (
     <div className="App">
@@ -18,6 +20,7 @@ function App() {
           </Route>
           <Route exact path="/catalog" component={Catalog} />
           <Route exact path="/reviews" component={Reviews} />
+          <Route exact path="/delivery" component={Delivery} />
         <Footer />
       </Router>
     </div>
