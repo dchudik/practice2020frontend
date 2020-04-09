@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 import Catalog from "./components/Catalog";
 import Reviews from './components/Reviews';
 import Delivery from './components/Delivery';
-
+import Cart from './components/Cart';
 function App() {
   return (
     <div className="App">
@@ -21,6 +21,7 @@ function App() {
           <Route exact path="/catalog" component={Catalog} />
           <Route exact path="/reviews" component={Reviews} />
           <Route exact path="/delivery" component={Delivery} />
+          <Route exact path="/cart" component={Cart} />
         <Footer />
       </Router>
     </div>

@@ -19,7 +19,7 @@ const Title = styled.p<ITitle>`
 const Description = styled.p`
   font-size: 20px;
 `;
-const Footer = () => {
+const Delivery = () => {
   return (
     <DeliveryBlock>
       <Title>Доставка по Санкт-Петербургу</Title>
@@ -62,4 +62,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default Delivery;

@@ -63,7 +63,9 @@ const Menu = () => {
         <img src={loveIcon} alt="love-icon" width="100%" height="100%" />
       </Icon>
       <Icon>
-        <img src={cartIcon} alt="love-icon" width="100%" height="100%" />
+        <Link to="/cart">
+          <img src={cartIcon} alt="love-icon" width="100%" height="100%" />
+        </Link>
       </Icon>
     </Header>
   );
