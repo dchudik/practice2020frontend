@@ -8,6 +8,7 @@ const DeliveryBlock = styled.div`
   margin-top: 80px;
   margin-left: 5%;
   min-height: 77vh;
+  width: 85%;
 `;
 const Title = styled.p<ITitle>`
   margin: 20px 0 0 0;

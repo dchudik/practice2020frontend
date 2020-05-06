@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const MainTitle = styled.h1`
   color: red;
@@ -7,8 +8,10 @@ const MainTitle = styled.h1`
   font-weight: bold;
 
 `;
-const MenuItem = styled.div`
+const MenuItem = styled(Link)`
   margin: 5px 0px;
+  color: black;
+  text-decoration: none;
 `;
 const MenuComponent = styled.div`
   text-align: center;
@@ -16,10 +19,10 @@ const MenuComponent = styled.div`
 const Menu = () => {
   return (
     <MenuComponent>
-        <MainTitle>Модничек</MainTitle>
-        <MenuItem>Сертификаты</MenuItem>
-        <MenuItem>Каталог</MenuItem>
-        <MenuItem>Адреса магазинов</MenuItem>
+        <MainTitle>Модники</MainTitle>
+        <p><MenuItem to="/reviews" >Отзывы</MenuItem></p>
+        <p><MenuItem to="/catalog" >Каталог</MenuItem></p>
+        <p><MenuItem to="/delivery" >Доставка</MenuItem></p>
     </MenuComponent>
   );
 };

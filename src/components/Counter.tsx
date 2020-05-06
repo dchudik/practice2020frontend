@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const MainTitle = styled.h1`
@@ -7,12 +7,24 @@ const MainTitle = styled.h1`
 `;
 const CounterBlock = styled.div`
   text-align: center;
+  padding-top: 20px;
 `;
 const Counter = () => {
+  const [counter, setCounter] = useState(0);
+  const getCounter = async () => {
+    const response = await fetch("http://213.108.215.19:8080/counters");
+    const json = await response.json();
+    console.log(json);
+    setCounter(json.counters);
+  };
+  useEffect(() => {
+    getCounter();
+  });
   return (
     <CounterBlock>
       <MainTitle>
-        В данный момент 239 человек выбирают товар, присоединяйтесь!
+        Количество человек которые выбирали товар сегодня: {counter}
+        <MainTitle>Присоединяйтесь!</MainTitle>
       </MainTitle>
     </CounterBlock>
   );

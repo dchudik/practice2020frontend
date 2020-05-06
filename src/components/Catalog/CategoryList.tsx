@@ -4,23 +4,26 @@ import styled from "styled-components";
 const CategoryBlock = styled.div`
   width: 100%;
 `;
-const CategoryList = () => {
+interface IProps {
+  findByType?: (type: string) => void;
+}
+const CategoryList = (props: IProps) => {
   return (
     <CategoryBlock>
       <h3>
-        Цвет <input type="checkbox" />
+        Тип <input type="checkbox" />
       </h3>
       <p>
         <input type="checkbox" />
-        <label>Зеленый</label>
+        <label>Сумка</label>
       </p>
       <p>
         <input type="checkbox" />
-        <label>Красный</label>
+        <label>Рюкзак</label>
       </p>
       <p>
         <input type="checkbox" />
-        <label>Синий</label>
+        <label>Портфель</label>
       </p>
     </CategoryBlock>
   );

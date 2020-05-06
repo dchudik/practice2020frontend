@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import GoodInCart from './GoodInCart';
 import ResultSumInCart from './ResultSumInCart';
-
+import { connect } from "react-redux";
+import { IGoods } from "../../redux/reducers/CartReducer";
 interface ITitle {
   color?: "red" | "black";
 }
@@ -21,15 +22,37 @@ const Title = styled.p<ITitle>`
 const Hr = styled.hr`
     margin: 20px 0;
 `;
-const Cart = () => {
+interface IState {
+  cart: IGoods[];
+}
+const Cart = (props:IState) => {
+  const getSum = ()=>{
+    let sum:number=0;
+    props.cart.forEach((item:IGoods)=>{
+      sum=sum+item.good.price*item.quantity;
+    });
+    return sum;
+  }
   return (
     <CartBlock>
       <Title>Корзина покупок</Title>
-        <GoodInCart />
+      { props.cart.length == 0 ? (
+        <p>В вашей корзине нет предметов</p>
+      ):(<div>
+        {
+        props.cart.map((item:IGoods)=>{
+        return <GoodInCart good={item}/>})}
         <Hr />
-        <ResultSumInCart />
+        <ResultSumInCart result={getSum()} />
+        </div>
+      )}
     </CartBlock>
   );
 };
+const mapStateToProps = (state: IState) => {
+  return {
+    cart: state.cart,
+  };
+};
 
-export default Cart;
+export default connect(mapStateToProps)(Cart);

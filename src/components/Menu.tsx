@@ -2,7 +2,11 @@ import * as React from "react";
 import styled from "styled-components";
 import loveIcon from "../assets/icons/heart-refresh.png";
 import cartIcon from "../assets/icons/buy.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { Good } from "../redux/types/Goods";
+import { IGoods } from "../redux/reducers/CartReducer";
+import { connect } from "react-redux";
+import { UserState } from "../redux/reducers/UserReducer";
 
 interface ActiveMenu {
   active?: boolean;
@@ -12,8 +16,9 @@ const MenuItem = styled(Link)<ActiveMenu>`
   background-color: ${(props) => (props.active ? "red" : "white")};
   color: ${(props) => (props.active ? "white" : "black")};
   font-weight: ${(props) => (props.active ? "bold" : "normal")};
-  font-size: 22px;
+  font-size: 20px;
   padding-top: 10px;
+  padding: 10px 15px;
   text-decoration: none;
 `;
 const Header = styled.header`
@@ -36,7 +41,7 @@ const Logo = styled(Link)`
 `;
 const Telephone = styled.h3`
   font-weight: bold;
-  font-size: 26px;
+  font-size: 22px;
   margin: 0;
   padding-top: 10px;
 `;
@@ -45,19 +50,99 @@ const Icon = styled.div`
   width: 40px;
   padding: 5px;
 `;
+const CountInCart = styled.p`
+  position: fixed;
+  top: 0px;
+  margin-left: 15px;
+  color: red;
+  font-weight: bold;
+  background-color: white;
+`;
+interface IProps {
+  cart: IGoods[];
+  user: UserState;
+}
 
-const Menu = () => {
+const Menu = (props: IProps) => {
+  const location = useLocation();
+
+  const [catalog, setCatalog] = React.useState(false);
+  const [reviews, setReviews] = React.useState(false);
+  const [delivery, setDelivery] = React.useState(false);
+  const [register, setRegister] = React.useState(false);
+  const [itemsInCart, setItemsInCart] = React.useState(0);
+  const setAllFalse = () => {
+    setRegister(false);
+    setCatalog(false);
+    setDelivery(false);
+    setReviews(false);
+  };
+  const Activate = () => {
+    switch (location.pathname) {
+      case "/catalog": {
+        setAllFalse();
+        setCatalog(true);
+        break;
+      }
+      case "/reviews": {
+        setAllFalse();
+        setReviews(true);
+        break;
+      }
+      case "/delivery": {
+        setAllFalse();
+        setDelivery(true);
+        break;
+      }
+      case "/register": {
+        setAllFalse();
+        setRegister(true);
+        break;
+      }
+      case "/": {
+        setAllFalse();
+        break;
+      }
+      case "/cart": {
+        setAllFalse();
+        break;
+      }
+    }
+  };
+  React.useEffect(() => {
+    Activate();
+    let count = 0;
+    props.cart.forEach((items: IGoods) => {
+      if (items.quantity)
+        count =
+          parseInt(count.toString()) + parseInt(items.quantity.toString());
+      else {
+        count++;
+      }
+    });
+    setItemsInCart(count);
+  });
   return (
     <Header>
-      <Logo to="/">
-        Модники
-      </Logo>
-      <MenuItem active to="/catalog">
+      <Logo to="/">Модники</Logo>
+      <MenuItem active={catalog} to="/catalog">
         Каталог
       </MenuItem>
-      <MenuItem to="/reviews">Отзывы</MenuItem>
-      <MenuItem to="/delivery">Доставка</MenuItem>
-      <MenuItem to="/">Контакты</MenuItem>
+      <MenuItem active={reviews} to="/reviews">
+        Отзывы
+      </MenuItem>
+      <MenuItem active={delivery} to="/delivery">
+        Доставка
+      </MenuItem>
+      {props.user.isAuth ? (
+        <MenuItem active={register} to="/">
+        {props.user.login}
+      </MenuItem>
+      ) : (
+        <MenuItem active={register} to="/register">
+          Регистрация
+        </MenuItem>
+      )}
       <Telephone>8 (911) 934-12-98</Telephone>
       <Icon>
         <img src={loveIcon} alt="love-icon" width="100%" height="100%" />
@@ -65,10 +150,20 @@ const Menu = () => {
       <Icon>
         <Link to="/cart">
           <img src={cartIcon} alt="love-icon" width="100%" height="100%" />
+          <CountInCart>x{itemsInCart}</CountInCart>
         </Link>
       </Icon>
     </Header>
   );
 };
-
-export default Menu;
+interface IState {
+  cart: IGoods[];
+  user: UserState;
+}
+const mapStateToProps = (state: IState) => {
+  return {
+    cart: state.cart,
+    user: state.user,
+  };
+};
+export default connect(mapStateToProps)(Menu);

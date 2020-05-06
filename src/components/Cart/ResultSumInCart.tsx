@@ -15,10 +15,13 @@ const Title = styled.p<ITitle>`
   font-weight: bold;
   color: ${(props) => (props.color ? props.color : "black")};
 `;
-const Cart = () => {
+interface IProps{
+  result:number;
+}
+const Cart = (props:IProps) => {
   return (
     <CartItemBlock>
-      <Title>Итог: 1 280 руб.</Title>
+      <Title>Итог: {props.result} руб.</Title>
     </CartItemBlock>
   );
 };

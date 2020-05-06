@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import ReviewsSliderElement from './ReviewsSliderElement';
+import ReviewsSliderElement from "./ReviewsSliderElement";
+import { Review } from "../../redux/types/Reviews";
 
 const ReviewsSliderBlock = styled.div`
   /* margin-top: 30px; */
@@ -8,16 +9,21 @@ const ReviewsSliderBlock = styled.div`
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-
 `;
-const ReviewsSlider = () => {
+interface IProps {
+  reviews: Review[];
+}
+const ReviewsSlider = (props: IProps) => {
   return (
     <ReviewsSliderBlock>
-        <ReviewsSliderElement />
-        <ReviewsSliderElement />
-        <ReviewsSliderElement />
-        <ReviewsSliderElement />
-        <ReviewsSliderElement />
+      {props.reviews.map((review: Review, index: number) => (
+        <ReviewsSliderElement
+          name={review.user.name}
+          login={review.user.login}
+          description={review.text}
+          datetime={review.datetime}
+        />
+      ))}
     </ReviewsSliderBlock>
   );
 };

@@ -8,6 +8,11 @@ import Catalog from "./components/Catalog";
 import Reviews from './components/Reviews';
 import Delivery from './components/Delivery';
 import Cart from './components/Cart';
+import Register from './components/Register';
+import ViewGood from './components/ViewGood';
+import Login from './components/Auth';
+import AddReview from './components/AddReview';
+
 function App() {
   return (
     <div className="App">
@@ -20,8 +25,12 @@ function App() {
           </Route>
           <Route exact path="/catalog" component={Catalog} />
           <Route exact path="/reviews" component={Reviews} />
+          <Route exact path="/reviews/new" component={AddReview} />
           <Route exact path="/delivery" component={Delivery} />
           <Route exact path="/cart" component={Cart} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/goods/:id" component={ViewGood} />
         <Footer />
       </Router>
     </div>
