@@ -13,7 +13,7 @@ import { Review, ReviewsActions, ADD_NEW_REVIEWS } from "../types/Reviews";
 import axios from 'axios';
 // import { Cookies } from 'js-cookie';
 
-const URL: string = "http://localhost:8080";
+const URL: string = "http://213.108.215.19:8080";
 
 export const AddReviews = (reviews: Review[]): ReviewsActions => ({
   type: ADD_NEW_REVIEWS,
@@ -39,20 +39,25 @@ export const thunkGetReviews = (): any => async (dispatch: any) => {
 };
 const fetchAddNewReview = async (text: string) => {
   try {
-    const response = await fetch(URL + "/reviews", 
+    const response = await axios.post(URL + "/reviews", 
+    { text },
     {
-      method: "POST",
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, 
-      credentials: "include",
-      body: JSON.stringify({ text }),
-    }
+      // method: "POST",
+      // headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, 
+      // credentials: "include",
+      withCredentials:true,
+      headers:{
+        'Cache':'no-cache',
+        'Cookie':document.cookie
+      }
+      // body: JSON.stringify({ text }),
+    },
     // {JSON.stringify({ text })},
-    // {withCredentials:true}
     );
     console.log(response);
-    const json = await response.json();
-    console.log(json);
-    return json
+    // const json = await response.json();
+    // console.log(json);
+    return response.data
   } catch {
     console.log("Fetch error");
   }

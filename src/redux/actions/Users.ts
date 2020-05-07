@@ -31,6 +31,7 @@ const fetchRegisterUser = async (data: RegisterUser) => {
       headers: { 'Content-Type': 'application/json' }, 
       // body: 
       // withCredentials: true,
+      credentials: "include",
       body: JSON.stringify(data),
     });
     console.log(response);
@@ -61,9 +62,11 @@ export const AuthUserAction = (data: RegisterResponse): UserActions => ({
 
 const fetchAuthUser = async (data: AuthUser) => {
   try {
-    const response = await fetch(URL + "/login", {
+    const response = await fetch(URL + "/login",
+    {
       method: "POST",
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, 
+      credentials: "include",
       body: JSON.stringify(data),
     });
     console.log(response);

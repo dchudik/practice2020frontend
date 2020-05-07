@@ -64,6 +64,9 @@ const Register = (props: IProps) => {
   const RegisterUser = (event: SyntheticEvent) => {
     event.preventDefault();
     if (password === repeatPassword) {
+      if(name.length>=3 && surname.length>=3){
+        if(login.length >= 4 && password.length>=4){
+          if(email.length>8){
       const data: RegisterUser = {
         name,
         surname,
@@ -72,6 +75,15 @@ const Register = (props: IProps) => {
         password,
       };
       props.registerNewUser(data);
+    }else{
+      alert("Введите корректный email")
+    }
+    }else{
+      alert("Логин и пароль должны быть больше чем 4 символа.")
+    }
+    }else{
+      alert("Имя и фамилия должны быть больше чем 3 символа.")
+    }
     } else {
       alert("Введенные пароли не совпадают");
     }

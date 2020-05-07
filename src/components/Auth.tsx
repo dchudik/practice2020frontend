@@ -5,7 +5,7 @@ import { RegisterUser, AuthUser } from "../redux/types/Users";
 import { thunkRegisterNewUser, thunkAuthUser } from "../redux/actions/Users";
 import { connect } from "react-redux";
 import { UserState } from "../redux/reducers/UserReducer";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 const MainTitle = styled.h1`
   color: grey;
   font-size: 32px;
@@ -47,10 +47,11 @@ const Form = styled.form`
   margin-top: 60px;
 `;
 const CenterLine = styled.p`
-    text-align: center;
+  text-align: center;
 `;
+
 interface IProps {
-    AuthNewUser: (data: AuthUser) => void;
+  AuthNewUser: (data: AuthUser) => void;
   user: UserState;
 }
 const Login = (props: IProps) => {
@@ -59,11 +60,23 @@ const Login = (props: IProps) => {
   const [password, setPassword] = useState("");
   const RegisterUser = (event: SyntheticEvent) => {
     event.preventDefault();
-    const data :AuthUser = {
-        login,
-        password
+    const data: AuthUser = {
+      login,
+      password,
+    };
+    if (login.length > 3) {
+      if (password.length > 4) {
+        props.AuthNewUser(data);
+      }else{
+        alert(
+          "Недопустимая длина пароля. Пароль должен быть больше чем 4 символа."
+        );
+      }
+    } else {
+      alert(
+        "Недопустимая длина логина. Логин должен быть больше чем 3 символа."
+      );
     }
-    props.AuthNewUser(data)
   };
   if (props.user.isAuth) {
     return <Redirect to={"/"} />;
@@ -86,13 +99,15 @@ const Login = (props: IProps) => {
               onChange={(e: any) => setPassword(e.target.value)}
             />
           </Line>
+          <CenterLine>
+            <p>Нет аккаунта?</p>
+            <p>
+              <Link to="/register">Зарегистрироваться</Link>
+            </p>
+          </CenterLine>
           <p style={{ textAlign: "center" }}>
             <Input type="reset" />
-            <Input
-              type="submit"
-              onClick={RegisterUser}
-              value={"Войти"}
-            />
+            <Input type="submit" onClick={RegisterUser} value={"Войти"} />
           </p>
         </Form>
       </RegisterBlock>
@@ -109,8 +124,7 @@ const mapStateToProps = (state: IState) => {
 };
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    AuthNewUser: (data: AuthUser) =>
-      dispatch(thunkAuthUser(data)),
+    AuthNewUser: (data: AuthUser) => dispatch(thunkAuthUser(data)),
   };
 };
 

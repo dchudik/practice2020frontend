@@ -136,17 +136,26 @@ const Menu = (props: IProps) => {
       </MenuItem>
       {props.user.isAuth ? (
         <MenuItem active={register} to="/">
-        {props.user.login}
-      </MenuItem>
+          {props.user.login}
+        </MenuItem>
       ) : (
         <MenuItem active={register} to="/register">
           Регистрация
         </MenuItem>
       )}
       <Telephone>8 (911) 934-12-98</Telephone>
-      <Icon>
-        <img src={loveIcon} alt="love-icon" width="100%" height="100%" />
-      </Icon>
+      {props.user.isAuth ? (
+        // <Link to="/">
+          <Icon>
+            <img src={loveIcon} alt="love-icon" width="100%" height="100%" />
+          </Icon>
+        // </Link>
+      ) : (
+        <Icon>
+          <img src={loveIcon} alt="love-icon" width="100%" height="100%" />
+        </Icon>
+      )}
+
       <Icon>
         <Link to="/cart">
           <img src={cartIcon} alt="love-icon" width="100%" height="100%" />

@@ -5,7 +5,7 @@ import { RegisterUser, AuthUser } from "../redux/types/Users";
 import { thunkRegisterNewUser, thunkAuthUser } from "../redux/actions/Users";
 import { connect } from "react-redux";
 import { UserState } from "../redux/reducers/UserReducer";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { thunkAddNewReview } from "../redux/actions/Reviews";
 
 const MainTitle = styled.h1`
@@ -52,23 +52,45 @@ const Form = styled.form`
 const CenterLine = styled.p`
   text-align: center;
 `;
+const StyledLink = styled(Link)``;
+const AddReview = styled.button`
+  color: white;
+  background-color: red;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px 3px;
+  border-color: red;
+  margin-left: 5%;
+`;
 interface IProps {
   AddNewReview: (text: string) => void;
   user: UserState;
+  history?: any;
 }
 const Login = (props: IProps) => {
   console.log(props.user);
   const [text, setText] = useState("");
   const AddNewReview = (event: SyntheticEvent) => {
     event.preventDefault();
-    props.AddNewReview(text);
+    if (text.length > 6) {
+      event.preventDefault();
+      props.AddNewReview(text);
+
+      // props.history.push("/reviews")
+    } else {
+      alert("Длина отзыва должна быть больше 6 символов");
+    }
   };
   if (!props.user.isAuth) {
     return <Redirect to={"/register"} />;
   } else {
     return (
       <RegisterBlock>
+       
         <Form>
+        <Link to="/reviews">
+          <AddReview>Просмотреть все отзывы</AddReview>
+        </Link>
           <Line>
             <Label>Введите содержание отзыва:</Label>
             <Area onChange={(e: any) => setText(e.target.value)} />
