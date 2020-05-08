@@ -1,3 +1,4 @@
+// main menu
 import * as React from "react";
 import styled from "styled-components";
 import loveIcon from "../assets/icons/heart-refresh.png";
@@ -7,10 +8,11 @@ import { Good } from "../redux/types/Goods";
 import { IGoods } from "../redux/reducers/CartReducer";
 import { connect } from "react-redux";
 import { UserState } from "../redux/reducers/UserReducer";
-
+// create props for menu item
 interface ActiveMenu {
   active?: boolean;
 }
+// create styles for menu element
 const MenuItem = styled(Link)<ActiveMenu>`
   width: 10%;
   background-color: ${(props) => (props.active ? "red" : "white")};
@@ -58,25 +60,29 @@ const CountInCart = styled.p`
   font-weight: bold;
   background-color: white;
 `;
+// props for component
 interface IProps {
   cart: IGoods[];
   user: UserState;
 }
-
+// menu compnent
 const Menu = (props: IProps) => {
   const location = useLocation();
-
+  // hooks for set state active element
   const [catalog, setCatalog] = React.useState(false);
   const [reviews, setReviews] = React.useState(false);
   const [delivery, setDelivery] = React.useState(false);
   const [register, setRegister] = React.useState(false);
   const [itemsInCart, setItemsInCart] = React.useState(0);
+  // disable all elemnts
   const setAllFalse = () => {
     setRegister(false);
     setCatalog(false);
     setDelivery(false);
     setReviews(false);
   };
+  // active element
+  // by location
   const Activate = () => {
     switch (location.pathname) {
       case "/catalog": {
@@ -110,6 +116,7 @@ const Menu = (props: IProps) => {
     }
   };
   React.useEffect(() => {
+    // count element in cart
     Activate();
     let count = 0;
     props.cart.forEach((items: IGoods) => {

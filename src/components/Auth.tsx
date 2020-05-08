@@ -1,3 +1,4 @@
+// component for login form
 import React, { useState, SyntheticEvent } from "react";
 import styled from "styled-components";
 import { Dispatch } from "redux";
@@ -6,6 +7,7 @@ import { thunkRegisterNewUser, thunkAuthUser } from "../redux/actions/Users";
 import { connect } from "react-redux";
 import { UserState } from "../redux/reducers/UserReducer";
 import { Redirect, Link } from "react-router-dom";
+// create styles
 const MainTitle = styled.h1`
   color: grey;
   font-size: 32px;
@@ -58,12 +60,16 @@ const Login = (props: IProps) => {
   console.log(props.user);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  // function execute after click
   const RegisterUser = (event: SyntheticEvent) => {
+    // delete default send and reload page
     event.preventDefault();
+    // create object by type
     const data: AuthUser = {
       login,
       password,
     };
+    //validate login and password
     if (login.length > 3) {
       if (password.length > 4) {
         props.AuthNewUser(data);
@@ -117,6 +123,7 @@ const Login = (props: IProps) => {
 interface IState {
   user: UserState;
 }
+// connect with state
 const mapStateToProps = (state: IState) => {
   return {
     user: state.user,

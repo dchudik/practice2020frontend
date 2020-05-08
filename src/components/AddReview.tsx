@@ -1,3 +1,4 @@
+// form for ad new reviews
 import React, { useState, SyntheticEvent } from "react";
 import styled from "styled-components";
 import { Dispatch } from "redux";
@@ -70,6 +71,8 @@ interface IProps {
 const Login = (props: IProps) => {
   console.log(props.user);
   const [text, setText] = useState("");
+  // validate params and execute thunk
+  // for send our review on server
   const AddNewReview = (event: SyntheticEvent) => {
     event.preventDefault();
     if (text.length > 6) {

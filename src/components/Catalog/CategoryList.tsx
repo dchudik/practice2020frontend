@@ -1,12 +1,16 @@
+// !deprecated component
+// old functions
 import React from "react";
 import styled from "styled-components";
-
+// styles for block like div element
 const CategoryBlock = styled.div`
   width: 100%;
 `;
+// input props and types
 interface IProps {
   findByType?: (type: string) => void;
 }
+// component for view category
 const CategoryList = (props: IProps) => {
   return (
     <CategoryBlock>

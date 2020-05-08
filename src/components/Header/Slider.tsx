@@ -1,10 +1,11 @@
+// slider for view three bags in down panel of header
 import React from "react";
 import styled from "styled-components";
 import bag1 from '../../assets/imgs/bag1.jpg'
 import bag2 from '../../assets/imgs/bag2.jpg'
 import bag3 from '../../assets/imgs/bag3.jpg'
 import { Link } from "react-router-dom";
-
+// create styles
 const MainTitle = styled.h1`
   color: grey;
   font-size: 32px;

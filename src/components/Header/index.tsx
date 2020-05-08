@@ -1,9 +1,10 @@
+// main compoennt for header
 import React from "react";
 import styled from "styled-components";
 import Title from "./Title";
 import Slider from "./Slider";
 import headerImg from "../../assets/imgs/header.jpg";
-
+// create styles
 const HeaderBlock = styled.div`
   /* margin-top: 30px; */
   display: flex;
@@ -17,6 +18,7 @@ const LeftBlock = styled.div`
 const ImgBlock = styled.div`
   width: 70%;
 `;
+// view title, main image and slider with three bags
 const Header = () => {
   return (
     <HeaderBlock>

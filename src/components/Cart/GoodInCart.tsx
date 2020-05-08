@@ -1,3 +1,4 @@
+// component for item in cart
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -7,11 +8,13 @@ import {
 } from "../../redux/actions/Goods";
 import { IGoods } from "../../redux/reducers/CartReducer";
 import { Dispatch } from "redux";
+// props for component
 interface IProps {
   good: IGoods;
   deleteGoodFromCart: (id: number) => void;
   incrementGoodInCart: (id: number, qty: number) => void;
 }
+// styles for component
 interface ITitle {
   color?: "red" | "black";
 }
@@ -44,12 +47,17 @@ const DeleteButton = styled.button`
 const Quantity = styled.p`
   font-size: 26px;
 `;
+// item in cart like functional coponent
 const Cart = (props: IProps) => {
+  // use hook for set state count position good
   let [count, setState] = React.useState(1);
   return (
     <CartItemBlock>
+      {/* our title */}
       <Title>{props.good.good.title}</Title>
+      {/* price for one position good */}
       <Price>{props.good.good.price} руб.</Price>
+      {/* quantity */}
       <Quantity>
         x
         <input
@@ -65,6 +73,7 @@ const Cart = (props: IProps) => {
           value={props.good.quantity}
         />
       </Quantity>
+      {/* calculate price  */}
       <Price>{props.good.good.price*count} руб.</Price>
       <DeleteButton
         onClick={() => props.deleteGoodFromCart(props.good.good.id)}
@@ -74,9 +83,12 @@ const Cart = (props: IProps) => {
     </CartItemBlock>
   );
 };
+// connect with redux for dispatch action
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
+    // action for remove this item from cart 
     deleteGoodFromCart: (id: number) => dispatch(deleteGoodFromCart(id)),
+    // action for add this item in cart
     incrementGoodInCart: (id: number, qty: number) =>
       dispatch(incrementGoodInCart(id, qty)),
   };

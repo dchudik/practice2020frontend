@@ -16,14 +16,14 @@ import {
 } from "../types/Users";
 import { RootState } from "../store";
 import axios from 'axios';
-
+// based url
 const URL: string = "http://213.108.215.19:8080";
-
+// action for register
 export const registerNewUser = (data: RegisterResponse): UserActions => ({
   type: REGISTER,
   payload: data,
 });
-
+// fetch on server with json params
 const fetchRegisterUser = async (data: RegisterUser) => {
   try {
     const response = await fetch(URL + "/register", {
@@ -43,6 +43,9 @@ const fetchRegisterUser = async (data: RegisterUser) => {
     console.log("Fetch error");
   }
 };
+// create thunk for dispatch from component
+// and validate response from server 
+// and alert message for user
 export const thunkRegisterNewUser = (data: RegisterUser): any => async (
   dispatch: any
 ) => {
@@ -54,12 +57,12 @@ export const thunkRegisterNewUser = (data: RegisterUser): any => async (
   else if (userResult.message == "Login already used")
     alert("Такой лоигн уже используется");
 };
-
+// action for auth
 export const AuthUserAction = (data: RegisterResponse): UserActions => ({
   type: AUTH,
   payload: data,
 });
-
+// create fetch for request
 const fetchAuthUser = async (data: AuthUser) => {
   try {
     const response = await fetch(URL + "/login",
@@ -78,6 +81,8 @@ const fetchAuthUser = async (data: AuthUser) => {
     console.log("Fetch error");
   }
 };
+// create thunk for dispatch from component
+// and if message success auth new user
 export const thunkAuthUser = (data: AuthUser): any => async (dispatch: any) => {
   const userResult = await fetchAuthUser(data);
 

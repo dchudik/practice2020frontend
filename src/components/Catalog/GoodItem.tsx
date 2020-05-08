@@ -1,3 +1,4 @@
+// component for view good in list
 import React from "react";
 import styled from "styled-components";
 import bagImage from "../../assets/imgs/15568.970.jpg";
@@ -6,6 +7,7 @@ import { addGoodInCart } from "../../redux/actions/Goods";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+// styles for component
 const GoodBlock = styled.div`
   width: 100%;
   text-align: center;
@@ -42,14 +44,17 @@ const StyledLink = styled(Link)`
   color: black;
   text-decoration: none;
 `;
+// input props with types
 interface IProps {
   good: Good;
   addGoodInCart: (good: Good) => void;
 }
+// functional component for view good
 const GoodItem = (props: IProps) => {
   return (
     <GoodBlock>
       <GoodImg>
+        {/* get image from nginx */}
         <img
           src={"http://213.108.215.19" + props.good.img}
           alt="bag-img"
@@ -57,7 +62,12 @@ const GoodItem = (props: IProps) => {
           height={"205px"}
         />
       </GoodImg>
-      <Title><StyledLink to={"/goods/"+props.good.id} > {props.good.title} </StyledLink> </Title>
+      <Title>
+        <StyledLink to={"/goods/" + props.good.id}>
+          {" "}
+          {props.good.title}{" "}
+        </StyledLink>{" "}
+      </Title>
       <Description>{props.good.description}</Description>
       <Price>Цена: {props.good.price} руб.</Price>
       <ButtonToCart onClick={() => props.addGoodInCart(props.good)}>
@@ -66,7 +76,8 @@ const GoodItem = (props: IProps) => {
     </GoodBlock>
   );
 };
-
+// connect with redux from dispatch action
+// add good in cart
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     addGoodInCart: (good: Good) => dispatch(addGoodInCart(good)),

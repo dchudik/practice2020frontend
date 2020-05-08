@@ -1,9 +1,11 @@
+// main page for cart
 import React from "react";
 import styled from "styled-components";
 import GoodInCart from './GoodInCart';
 import ResultSumInCart from './ResultSumInCart';
 import { connect } from "react-redux";
 import { IGoods } from "../../redux/reducers/CartReducer";
+// styles for elements
 interface ITitle {
   color?: "red" | "black";
 }
@@ -25,7 +27,9 @@ const Hr = styled.hr`
 interface IState {
   cart: IGoods[];
 }
+// functional component
 const Cart = (props:IState) => {
+  // function for get summ  by all goods
   const getSum = ()=>{
     let sum:number=0;
     props.cart.forEach((item:IGoods)=>{
@@ -49,6 +53,7 @@ const Cart = (props:IState) => {
     </CartBlock>
   );
 };
+// connect with redux
 const mapStateToProps = (state: IState) => {
   return {
     cart: state.cart,

@@ -1,3 +1,4 @@
+// element in slider for reviews
 import React from "react";
 import styled from "styled-components";
 
@@ -33,6 +34,7 @@ const ReviewsSlider = (props: IProps) => {
   const getDateFromString = (datetime:string)=>{
     return datetime.split('T')[0];
   }
+  // parse date and time from server
   const getTimeFromString = (datetime:string)=>{
     return datetime.split('T')[1].split(':').slice(0,2).join(':');
   }

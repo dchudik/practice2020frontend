@@ -1,8 +1,7 @@
+// compoennt for get list of cateries 
 import React from "react";
 import styled from "styled-components";
-// import CategoryListColor from "./CategoryListColor";
-// import CategoryListType from "./CategoryList";
-
+// styles
 const CategoryBlock = styled.div`
   border-color: red;
   border: 2px solid red;
@@ -21,6 +20,7 @@ const FindButton = styled.button`
     background-color: transparent;
     font-weight: bold;
 `;
+// types for input props in component
 interface  IProps{
   gender: string;
   setGender: (gender:any)=>void;
@@ -31,6 +31,7 @@ interface  IProps{
   sort: string;
   setSort: (color: any)=>void;
 }
+// functional component for view categories
 const Category = (props:IProps) => {
   // const [gender, setGender] = React.useState("none");
   return (
@@ -66,14 +67,6 @@ const Category = (props:IProps) => {
         <option value="red"  >Красный</option>
         <option value="blue" >Синий</option>
       </select>
- 
-      {/* <h3 >Сортировать</h3>
-      <select name="sort" id="sort" onChange={(event:any)=>props.setSort(event.target.value)}>
-        <option value="none">По популярности</option>
-        <option value="price-min">По убыванию цены</option>
-        <option value="price-max">По возрастанию цены</option>
-      </select> */}
-      {/* <FindButton>Найти</FindButton> */}
     </CategoryBlock>
   );
 };

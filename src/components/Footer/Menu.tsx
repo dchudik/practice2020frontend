@@ -1,7 +1,8 @@
+// footer menu
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
+// create styles
 const MainTitle = styled.h1`
   color: red;
   font-size: 26px;
@@ -16,6 +17,7 @@ const MenuItem = styled(Link)`
 const MenuComponent = styled.div`
   text-align: center;
 `;
+// functional compoennt
 const Menu = () => {
   return (
     <MenuComponent>

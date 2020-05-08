@@ -1,3 +1,4 @@
+// slider with review
 import React from "react";
 import styled from "styled-components";
 import ReviewsSliderElement from "./ReviewsSliderElement";

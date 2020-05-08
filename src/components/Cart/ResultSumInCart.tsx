@@ -1,6 +1,7 @@
+// component for display price about all positions
 import React from "react";
 import styled from "styled-components";
-
+// styles for component
 interface ITitle {
   color?: "red" | "black";
 }
@@ -15,9 +16,11 @@ const Title = styled.p<ITitle>`
   font-weight: bold;
   color: ${(props) => (props.color ? props.color : "black")};
 `;
+// types for props 
 interface IProps{
   result:number;
 }
+// functional component for display prices
 const Cart = (props:IProps) => {
   return (
     <CartItemBlock>

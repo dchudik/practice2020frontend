@@ -1,3 +1,4 @@
+// review page
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import ReviewsSlider from "./ReviewsSlider";
@@ -7,7 +8,7 @@ import { UserState } from "../../redux/reducers/UserReducer";
 import { connect } from "react-redux";
 import { Review } from "../../redux/types/Reviews";
 import { Link } from "react-router-dom";
-
+// create styles
 const ReviewsBlock = styled.div`
   margin-top: 60px;
   min-height: 77vh;
@@ -26,12 +27,15 @@ const AddReview = styled.button`
   margin-left: 5%;
 `;
 const StyledLink = styled(Link)``;
+// create props
 interface IProps {
   user: UserState;
   reviews: Review[];
   GetNewReviews: () => void;
 }
 const Reviews = (props: IProps) => {
+  // get reviews from server
+  // when component mount
   useEffect(() => {
     props.GetNewReviews();
   }, []);

@@ -1,3 +1,4 @@
+// simple reducer for set state in redux for reviews from server
 import { GET_GOODS, Good, GoodsActions } from "../types/Goods";
 import {Review, ReviewsActions, ADD_NEW_REVIEWS} from '../types/Reviews'
 

@@ -1,3 +1,5 @@
+// main component for footer
+// collect form and menu for views
 import React from "react";
 import styled from "styled-components";
 import Form from "./Form";

@@ -12,14 +12,14 @@ import { RootState } from "../store";
 import { Review, ReviewsActions, ADD_NEW_REVIEWS } from "../types/Reviews";
 import axios from 'axios';
 // import { Cookies } from 'js-cookie';
-
+// based url
 const URL: string = "http://213.108.215.19:8080";
-
+// add review in store from server
 export const AddReviews = (reviews: Review[]): ReviewsActions => ({
   type: ADD_NEW_REVIEWS,
   payload: reviews,
 });
-
+// request for get reviews from server
 const fetchGetReviews = async () => {
   let reviews = [];
   try {
@@ -33,10 +33,17 @@ const fetchGetReviews = async () => {
   }
   return reviews;
 };
+// create thunk for get reviews
+// and dispatch if success response
 export const thunkGetReviews = (): any => async (dispatch: any) => {
   const reviews = await fetchGetReviews();
   dispatch(AddReviews(reviews));
 };
+// add review request
+// based on cookie session
+// by default it's not support 
+// use withCredentials: true
+// for auth on server
 const fetchAddNewReview = async (text: string) => {
   try {
     const response = await axios.post(URL + "/reviews", 
@@ -62,6 +69,8 @@ const fetchAddNewReview = async (text: string) => {
     console.log("Fetch error");
   }
 };
+// create thunk for add review
+// if succes alert success message
 export const thunkAddNewReview = (text: string): any => async (
   dispatch: any
 ) => {

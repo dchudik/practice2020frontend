@@ -1,3 +1,4 @@
+// component for register user
 import React, { useState, SyntheticEvent } from "react";
 import styled from "styled-components";
 import { Dispatch } from "redux";
@@ -6,6 +7,7 @@ import { thunkRegisterNewUser } from "../redux/actions/Users";
 import { connect } from "react-redux";
 import { UserState } from "../redux/reducers/UserReducer";
 import { Redirect, Link } from "react-router-dom";
+// create styles
 const MainTitle = styled.h1`
   color: grey;
   font-size: 32px;
@@ -49,6 +51,7 @@ const Form = styled.form`
 const CenterLine = styled.p`
   text-align: center;
 `;
+// create props for component
 interface IProps {
   registerNewUser: (data: RegisterUser) => void;
   user: UserState;
@@ -63,6 +66,7 @@ const Register = (props: IProps) => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const RegisterUser = (event: SyntheticEvent) => {
     event.preventDefault();
+    // validate all params
     if (password === repeatPassword) {
       if(name.length>=3 && surname.length>=3){
         if(login.length >= 4 && password.length>=4){
@@ -88,6 +92,8 @@ const Register = (props: IProps) => {
       alert("Введенные пароли не совпадают");
     }
   };
+  // if user already login
+  // redirect on main page
   if (props.user.isAuth) {
     return <Redirect to={"/"} />;
   } else {
@@ -158,11 +164,13 @@ const Register = (props: IProps) => {
 interface IState {
   user: UserState;
 }
+// connect with redux for get about current user
 const mapStateToProps = (state: IState) => {
   return {
     user: state.user,
   };
 };
+// execute thunk for send request register on server
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     registerNewUser: (data: RegisterUser) =>

@@ -1,3 +1,4 @@
+// view one good after click on image or name
 import React from "react";
 import styled from "styled-components";
 //import bagImage from "../assets/imgs/15568.970.jpg";
@@ -5,6 +6,7 @@ import { Good } from "../redux/types/Goods";
 import { addGoodInCart } from "../redux/actions/Goods";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
+// create styles
 const GoodBlock = styled.div`
   width: 100%;
   text-align: center;
@@ -38,6 +40,7 @@ const ButtonToCart = styled.button`
     font-weight: bold;
   }
 `;
+// create props
 interface IProps {
   goods: Good[];
   addGoodInCart: (good: Good) => void;
@@ -45,6 +48,7 @@ interface IProps {
 }
 const GoodItem = (props: IProps) => {
   const [isFind, setIsFind] = React.useState(false);
+  // default state
   let goodItem: Good = {
       id:1,
       title:'',
@@ -61,6 +65,7 @@ const GoodItem = (props: IProps) => {
       goodItem = good;
     }
   });
+  // if server send info about element
   if (isFindElement) {
     return (
       <GoodBlock>
@@ -92,11 +97,13 @@ interface IState {
   goods: Good[];
   fetchGoods: () => void;
 }
+// get state about goods from redux 
 const mapStateToProps = (state: IState) => {
   return {
     goods: state.goods,
   };
 };
+// create function for add item in cart
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     addGoodInCart: (good: Good) => dispatch(addGoodInCart(good)),

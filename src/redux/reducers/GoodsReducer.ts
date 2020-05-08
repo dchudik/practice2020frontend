@@ -1,5 +1,6 @@
+// simple reducer for add new items in store
 import { GET_GOODS, Good, GoodsActions } from "../types/Goods";
-
+// init state
 const initialState: Good[] = [];
 
  const GoodsReducer = (
